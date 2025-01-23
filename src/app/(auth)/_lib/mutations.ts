@@ -42,3 +42,33 @@ export const tokenAuthMutation = gql`
     }
   }
 `;
+
+export const tokenVerifyMutation = gql`
+  ${fragmentUser}
+  ${pageInfoFragment}
+  mutation VerifyToken(
+    $token: String!
+    $after: String
+    $before: String
+    $last: Int
+  ) {
+    tokenVerify(token: $token) {
+      payload
+      user {
+        ...User
+        malls(after: $after, before: $before, first: 100, last: $last) {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+          totalCount
+          pageInfo {
+            ...PageInfoFragment
+          }
+        }
+      }
+    }
+  }
+`;
