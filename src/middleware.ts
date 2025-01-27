@@ -5,7 +5,7 @@ import { verifyToken } from "./app/(auth)/_lib/utils";
 const AUTH_PAGES = ["/login"];
 
 export default async function middleware(request: NextRequest) {
-  const { url, nextUrl, cookies } = request;
+  const { url, nextUrl, cookies, headers } = request;
   const authToken = cookies.get("token");
 
   const isAuthPage = () =>
@@ -26,7 +26,15 @@ export default async function middleware(request: NextRequest) {
       response.cookies.delete("token");
       return response;
     }
-    return NextResponse.next();
+
+    const requestHeaders = new Headers(headers);
+    requestHeaders.set("authorization", `JWT ${authToken.value}`);
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
   // auth pages (login)
