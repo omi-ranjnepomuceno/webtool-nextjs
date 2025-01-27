@@ -1,6 +1,5 @@
 import { getClient } from "@/lib/apolloClient";
-import { pageInfoFragment } from "./fragments";
-import { fragmentUser } from "./fragments";
+import { fragmentUser, pageInfoFragment } from "./fragments";
 import { gql } from "@apollo/client";
 import type {
   TokenAuthMutation,
@@ -51,10 +50,9 @@ const tokenAuthDocument = gql`
 `;
 
 export async function tokenAuthMutation(email: string, password: string) {
-  const { data } = await getClient().mutate<
-    TokenAuthMutation,
-    TokenAuthMutationVariables
-  >({
+  const { data } = await (
+    await getClient()
+  ).mutate<TokenAuthMutation, TokenAuthMutationVariables>({
     mutation: tokenAuthDocument,
     variables: { email, password },
   });
@@ -93,10 +91,9 @@ const tokenVerifyDocument = gql`
 `;
 
 export async function tokenVerifyMutation(token: string) {
-  const data = await getClient().mutate<
-    VerifyTokenMutation,
-    VerifyTokenMutationVariables
-  >({
+  const data = await (
+    await getClient()
+  ).mutate<VerifyTokenMutation, VerifyTokenMutationVariables>({
     mutation: tokenVerifyDocument,
     variables: { token },
     errorPolicy: "all",

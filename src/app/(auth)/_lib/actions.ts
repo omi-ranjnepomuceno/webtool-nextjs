@@ -3,6 +3,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { tokenAuthMutation } from "./mutations";
+import { getUserIdFromToken } from "./utils";
+import { userDetailsQuery } from "./queries";
 
 export async function login(_: { message: string }, formData: FormData) {
   // type of first arg (prevState) should be the same with this action's return type
@@ -21,4 +23,10 @@ export async function login(_: { message: string }, formData: FormData) {
     redirect("/");
   }
   return { message: "" };
+}
+
+export async function getUserDetails() {
+  const userId = await getUserIdFromToken();
+  const data = await userDetailsQuery(userId!);
+  return data;
 }
