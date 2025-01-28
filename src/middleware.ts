@@ -26,7 +26,6 @@ export default async function middleware(request: NextRequest) {
       response.cookies.delete("token");
       return response;
     }
-
     return NextResponse.next();
   }
 
