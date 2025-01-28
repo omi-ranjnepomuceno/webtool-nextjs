@@ -1,3 +1,5 @@
-export default function Homepage() {
-  return <div>Home page</div>;
+import ClientComponent from "./products/ClientComponent";
+
+export default async function Homepage() {
+  return <ClientComponent />;
 }

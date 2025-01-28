@@ -1,10 +1,7 @@
 import { cookies } from "next/headers";
-import { getClient } from "@/lib/apolloClient";
 import { tokenVerifyMutation } from "./mutations";
-import type {
-  VerifyTokenMutation,
-  VerifyTokenMutationVariables,
-} from "@/types/__generated__/graphql";
+import { userDetailsQuery } from "./queries";
+import type { AuthToken } from "@/types/AuthToken";
 
 export async function getAuthToken() {
   const cookieStore = await cookies();
@@ -12,18 +9,23 @@ export async function getAuthToken() {
   if (!authToken) {
     return null;
   }
-  return authToken;
+  return authToken.value;
+}
+
+export async function getUserIdFromToken() {
+  const authToken = await getAuthToken();
+  if (authToken) {
+    const payload: AuthToken = JSON.parse(atob(authToken.split(".")[1]));
+    return payload.user_id;
+  }
 }
 
 export async function verifyToken(token: string) {
-  const result = await getClient().mutate<
-    VerifyTokenMutation,
-    VerifyTokenMutationVariables
-  >({
-    mutation: tokenVerifyMutation,
-    variables: { token },
-    errorPolicy: "all",
-  });
-
+  const result = await tokenVerifyMutation(token);
   return result;
+}
+
+export async function getUserDetails() {
+  const data = await userDetailsQuery();
+  return data.data.me;
 }
