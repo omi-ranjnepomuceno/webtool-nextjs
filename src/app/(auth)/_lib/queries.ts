@@ -9,8 +9,8 @@ import type {
 const userDetailsDocument = gql`
   ${fragmentUser}
   ${pageInfoFragment}
-  query UserDetails($id: ID!, $after: String, $before: String, $last: Int) {
-    user(id: $id) {
+  query UserDetails($after: String, $before: String, $last: Int) {
+    me {
       ...User
       malls(after: $after, before: $before, first: 100, last: $last) {
         edges {
@@ -28,18 +28,11 @@ const userDetailsDocument = gql`
   }
 `;
 
-export async function userDetailsQuery(userId: string) {
+export async function userDetailsQuery() {
   const data = await query<UserDetailsQuery, UserDetailsQueryVariables>({
     query: userDetailsDocument,
-    variables: { id: userId },
     errorPolicy: "all",
   });
 
   return data;
-
-  // if (result?.data?.user) {
-  //   return result;
-  // } else {
-  //   throw new Error("User not found!");
-  // }
 }

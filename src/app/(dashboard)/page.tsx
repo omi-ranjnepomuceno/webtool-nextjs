@@ -1,6 +1,5 @@
-import { getUserDetails } from "../(auth)/_lib/actions";
+import ClientComponent from "./products/ClientComponent";
 
 export default async function Homepage() {
-  await getUserDetails();
-  return <div>Home page</div>;
+  return <ClientComponent />;
 }
