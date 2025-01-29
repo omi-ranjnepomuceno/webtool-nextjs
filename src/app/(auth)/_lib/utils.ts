@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { tokenVerifyMutation } from "./mutations";
 import { userDetailsQuery } from "./queries";
-import type { AuthToken } from "@/types/AuthToken";
+import type { AuthTokenPayload } from "@/types/AuthTokenPayload";
 
 export async function getAuthToken() {
   const cookieStore = await cookies();
@@ -12,17 +12,17 @@ export async function getAuthToken() {
   return authToken.value;
 }
 
-export async function getUserIdFromToken() {
+export async function getPayloadFromToken() {
   const authToken = await getAuthToken();
   if (authToken) {
-    const payload: AuthToken = JSON.parse(atob(authToken.split(".")[1]));
-    return payload.user_id;
+    const payload: AuthTokenPayload = JSON.parse(atob(authToken.split(".")[1]));
+    return payload;
   }
 }
 
 export async function verifyToken(token: string) {
-  const result = await tokenVerifyMutation(token);
-  return result;
+  const data = await tokenVerifyMutation(token);
+  return data;
 }
 
 export async function getUserDetails() {

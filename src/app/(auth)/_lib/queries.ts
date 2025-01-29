@@ -5,6 +5,7 @@ import type {
   UserDetailsQuery,
   UserDetailsQueryVariables,
 } from "@/types/__generated__/graphql";
+import { getAuthToken } from "./utils";
 
 const userDetailsDocument = gql`
   ${fragmentUser}
@@ -32,6 +33,11 @@ export async function userDetailsQuery() {
   const data = await query<UserDetailsQuery, UserDetailsQueryVariables>({
     query: userDetailsDocument,
     errorPolicy: "all",
+    context: {
+      headers: {
+        authorization: `JWT ${await getAuthToken()}`,
+      },
+    },
   });
 
   return data;
