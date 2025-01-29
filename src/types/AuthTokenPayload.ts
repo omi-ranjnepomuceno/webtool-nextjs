@@ -1,4 +1,4 @@
-export type AuthToken = {
+export type AuthTokenPayload = {
   iat: number;
   exp: number;
   token: string;
