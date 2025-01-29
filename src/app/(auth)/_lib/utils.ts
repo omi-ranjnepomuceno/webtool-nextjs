@@ -21,8 +21,8 @@ export async function getPayloadFromToken() {
 }
 
 export async function verifyToken(token: string) {
-  const result = await tokenVerifyMutation(token);
-  return result;
+  const data = await tokenVerifyMutation(token);
+  return data;
 }
 
 export async function getUserDetails() {
