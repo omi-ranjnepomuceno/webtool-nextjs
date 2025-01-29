@@ -2,25 +2,44 @@
 
 import { useActionState } from "react";
 import { login } from "../_lib/actions";
+import { Button, Input } from "@/components/material-tailwind";
+import smLogo from "@/assets/images/smo-blue.svg";
+import smLoginImage from "@/assets/images/smop-login.svg";
+import Image from "next/image";
 
 export default function LoginForm() {
   // we're only returning error from the login action, so named the first arg error
   const [error, action, isPending] = useActionState(login, { message: "" });
 
   return (
-    <form
-      action={action}
-      className="flex flex-col border p-4 gap-4 bg-white w-64"
-    >
-      <label htmlFor="email">Email</label>
-      <input type="email" name="email" />
-
-      <label htmlFor="password">Password</label>
-      <input type="password" name="password" />
-
-      <button type="submit">Login</button>
-      {isPending && <p>loading</p>}
-      {error && <p>{error.message}</p>}
-    </form>
+    <div className="w-full max-w-[328px] lg:max-w-[800px] border border-gray-300 bg-white">
+      {error.message && (
+        <p className="bg-error p-3 text-white text-xs">{error.message}</p>
+      )}
+      <div className="p-8 flex flex-col lg:flex-row gap-6 lg:gap-12">
+        <div className="mt-auto w-full lg:w-64">
+          <Image src={smLoginImage} alt="sm-login-image" />
+        </div>
+        <div className="flex flex-col gap-6 flex-1">
+          <div className="flex items-center gap-4">
+            <Image src={smLogo} alt="sm-logo" width={50} />
+            <p className="text-2xl">Welcome Back!</p>
+          </div>
+          <form action={action} className="flex flex-col gap-4">
+            <Input type="email" name="email" label="Email Address" size="lg" />
+            <Input type="password" name="password" label="Password" size="lg" />
+            <div className="flex justify-end">
+              <Button
+                type="submit"
+                disabled={isPending}
+                className="bg-secondary text-primary font-semibold shadow-none px-12"
+              >
+                LOGIN
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
