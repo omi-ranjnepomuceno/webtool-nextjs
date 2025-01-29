@@ -11,9 +11,5 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const user = await getUserDetails();
-  return (
-    <UserProvider user={user}>
-      {children} <p>DashboardLayout</p>
-    </UserProvider>
-  );
+  return <UserProvider user={user}>{children}</UserProvider>;
 }
