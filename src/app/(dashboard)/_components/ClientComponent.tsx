@@ -1,9 +1,19 @@
 "use client";
 
+import { Button } from "@/components/material-tailwind";
 import { useUser } from "../_lib/hooks";
+import { logout } from "@/app/(auth)/_lib/actions";
 
 export default function ClientComponent() {
   const { user } = useUser();
 
-  return <div>Home page {user?.email}</div>;
+  return (
+    <div>
+      <p>
+        NAME: {user?.firstName} {user?.lastName}
+      </p>
+      <p>EMAIL: {user?.email}</p>
+      <Button onClick={async () => await logout()}>LOGOUT</Button>
+    </div>
+  );
 }

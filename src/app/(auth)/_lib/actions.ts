@@ -22,3 +22,8 @@ export async function login(_: { message: string }, formData: FormData) {
   }
   return { message: "" };
 }
+
+export async function logout() {
+  (await cookies()).delete("token");
+  redirect("/");
+}
