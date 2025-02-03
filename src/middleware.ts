@@ -20,8 +20,8 @@ export default async function middleware(request: NextRequest) {
       return createRedirectResponse("/login");
     }
 
-    const result = await verifyToken(authToken.value);
-    if (result.errors) {
+    const { errors } = await verifyToken(authToken.value);
+    if (errors) {
       const response = createRedirectResponse("/login");
       response.cookies.delete("token");
       return response;

@@ -5,7 +5,7 @@ import { useUser } from "../_lib/hooks";
 import { logout } from "@/app/(auth)/_lib/actions";
 
 export default function ClientComponent() {
-  const { user } = useUser();
+  const user = useUser();
 
   return (
     <div>

@@ -79,18 +79,20 @@ export interface User_malls {
 }
 
 export interface User {
-  __typename: "User";
-  id: string;
-  email: string | null;
-  firstName: string;
-  lastName: string;
-  userPermissions: (User_userPermissions | null)[] | null;
-  avatar: User_avatar | null;
-  businessDetails: User_businessDetails | null;
-  permissionGroups: (User_permissionGroups | null)[] | null;
-  accessGroup: User_accessGroup | null;
-  status: LockStatus | null;
-  contactNo: string | null;
-  malls: User_malls | null;
-  promoCreator?: StaffPromoCreatorEnum | null;
+  me: {
+    __typename: "User";
+    id: string;
+    email: string | null;
+    firstName: string;
+    lastName: string;
+    userPermissions: (User_userPermissions | null)[] | null;
+    avatar: User_avatar | null;
+    businessDetails: User_businessDetails | null;
+    permissionGroups: (User_permissionGroups | null)[] | null;
+    accessGroup: User_accessGroup | null;
+    status: LockStatus | null;
+    contactNo: string | null;
+    malls: User_malls | null;
+    promoCreator?: StaffPromoCreatorEnum | null;
+  };
 }
