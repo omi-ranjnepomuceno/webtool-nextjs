@@ -1,15 +1,19 @@
 import { getClient } from "@/lib/apolloClient";
-import { fragmentUser, pageInfoFragment } from "./fragments";
+import { userFragment } from "@/fragments/user";
+import { pageInfoFragment } from "@/fragments/pageInfo";
 import { gql } from "@apollo/client";
-import type {
-  TokenAuthMutation,
-  TokenAuthMutationVariables,
+
+import {
   VerifyTokenMutation,
   VerifyTokenMutationVariables,
-} from "./types/__generated__/mutations.types";
+} from "./types/VerifyToken";
+import {
+  CreateTokenMutation,
+  CreateTokenMutationVariables,
+} from "./types/CreateToken";
 
 const tokenAuthDocument = gql`
-  ${fragmentUser}
+  ${userFragment}
   ${pageInfoFragment}
   mutation TokenAuth(
     $email: String!
@@ -51,8 +55,8 @@ const tokenAuthDocument = gql`
 
 export async function tokenAuthMutation(email: string, password: string) {
   const { data } = await getClient().mutate<
-    TokenAuthMutation,
-    TokenAuthMutationVariables
+    CreateTokenMutation,
+    CreateTokenMutationVariables
   >({
     mutation: tokenAuthDocument,
     variables: { email, password },
@@ -62,7 +66,7 @@ export async function tokenAuthMutation(email: string, password: string) {
 }
 
 const tokenVerifyDocument = gql`
-  ${fragmentUser}
+  ${userFragment}
   ${pageInfoFragment}
   mutation VerifyToken(
     $token: String!

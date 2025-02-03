@@ -1,14 +1,13 @@
 import { gql } from "@apollo/client";
-import { fragmentUser, pageInfoFragment } from "./fragments";
+import { userFragment } from "@/fragments/user";
+import { pageInfoFragment } from "@/fragments/pageInfo";
 import { query } from "@/lib/apolloClient";
-import type {
-  UserDetailsQuery,
-  UserDetailsQueryVariables,
-} from "./types/__generated__/queries.types";
 import { getAuthToken } from "./utils";
 
+import { User } from "@/types/User";
+
 const userDetailsDocument = gql`
-  ${fragmentUser}
+  ${userFragment}
   ${pageInfoFragment}
   query UserDetails($after: String, $before: String, $last: Int) {
     me {
@@ -30,7 +29,7 @@ const userDetailsDocument = gql`
 `;
 
 export async function userDetailsQuery() {
-  const data = await query<UserDetailsQuery, UserDetailsQueryVariables>({
+  const data = await query<User>({
     query: userDetailsDocument,
     errorPolicy: "all",
     context: {
