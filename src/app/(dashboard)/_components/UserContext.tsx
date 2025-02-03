@@ -3,20 +3,14 @@
 import { User } from "@/types/User";
 import { createContext } from "react";
 
-interface UserContext {
-  user?: User;
-}
-
-export const UserContext = createContext<UserContext>({});
+export const UserContext = createContext<User["me"] | null>(null);
 
 export const UserProvider = ({
   user,
   children,
 }: {
-  user: User;
+  user: User["me"];
   children: React.ReactNode;
 }) => {
-  return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
-  );
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };

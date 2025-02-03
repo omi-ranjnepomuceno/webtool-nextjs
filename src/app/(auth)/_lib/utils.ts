@@ -26,6 +26,6 @@ export async function verifyToken(token: string) {
 }
 
 export async function getUserDetails() {
-  const data = await userDetailsQuery();
-  return data.data.me;
+  const { data } = await userDetailsQuery();
+  return data.me;
 }

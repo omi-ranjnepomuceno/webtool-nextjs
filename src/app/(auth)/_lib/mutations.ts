@@ -54,7 +54,7 @@ const tokenAuthDocument = gql`
 `;
 
 export async function tokenAuthMutation(email: string, password: string) {
-  const { data } = await getClient().mutate<
+  const data = await getClient().mutate<
     CreateTokenMutation,
     CreateTokenMutationVariables
   >({
