@@ -4,7 +4,7 @@ import { query } from "@/lib/apolloClient";
 import type {
   UserDetailsQuery,
   UserDetailsQueryVariables,
-} from "@/types/__generated__/graphql";
+} from "./types/__generated__/queries.types";
 import { getAuthToken } from "./utils";
 
 const userDetailsDocument = gql`
