@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/material-tailwind";
+import Button from "@/components/Button";
 import { useUser } from "../_lib/hooks";
 import { logout } from "@/app/(auth)/_lib/actions";
 

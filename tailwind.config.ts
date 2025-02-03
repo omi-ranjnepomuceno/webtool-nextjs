@@ -12,8 +12,8 @@ export default withMT({
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: "#0030FF",
-        secondary: "#FFD15C",
+        primary: "#FFD15C",
+        secondary: "#0030FF",
         error: "#B20B0B",
       },
     },
