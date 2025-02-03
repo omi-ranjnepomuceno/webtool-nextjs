@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const fragmentUser = gql`
+export const userFragment = gql`
   fragment User on User {
     id
     email
@@ -35,14 +35,5 @@ export const fragmentUser = gql`
     status
     contactNo
     promoCreator
-  }
-`;
-
-export const pageInfoFragment = gql`
-  fragment PageInfoFragment on PageInfo {
-    endCursor
-    hasNextPage
-    hasPreviousPage
-    startCursor
   }
 `;

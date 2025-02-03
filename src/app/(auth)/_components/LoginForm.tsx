@@ -2,7 +2,8 @@
 
 import { useActionState } from "react";
 import { login } from "../_lib/actions";
-import { Button, Input } from "@/components/material-tailwind";
+import Button from "@/components/Button";
+import Input from "@/components/Input";
 import smLogo from "@/assets/images/smo-blue.svg";
 import smLoginImage from "@/assets/images/smop-login.svg";
 import Image from "next/image";
@@ -26,14 +27,10 @@ export default function LoginForm() {
             <p className="text-2xl">Welcome Back!</p>
           </div>
           <form action={action} className="flex flex-col gap-4">
-            <Input type="email" name="email" label="Email Address" size="lg" />
-            <Input type="password" name="password" label="Password" size="lg" />
+            <Input type="email" name="email" label="Email" />
+            <Input type="password" name="password" label="Password" />
             <div className="flex justify-end">
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="bg-secondary text-primary font-semibold shadow-none px-12"
-              >
+              <Button type="submit" disabled={isPending}>
                 LOGIN
               </Button>
             </div>
