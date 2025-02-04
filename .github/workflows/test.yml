@@ -1,0 +1,23 @@
+name: QA
+
+on:
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  tsc-formatter-linter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          npm ci
+      - name: Run tsc
+        run: |
+          npm run check-types
+      - name: Run linter
+        run: |
+          npm run lint
+      - name: Run formatter
+        run: |
+          npm run format:check
