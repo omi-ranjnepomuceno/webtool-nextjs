@@ -1,0 +1,6 @@
+# Ignore everything first
+/*
+
+# Allow formatting only inside src for specific file types
+!/src
+/src/**/*.!(js|ts|jsx|tsx)
