@@ -5,7 +5,7 @@ import { login } from "../_lib/actions";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import smLogo from "@/assets/images/smo-blue.svg";
-import smLoginImage from "../../../assets/images/smop-login.svg";
+import smLoginImage from "@/assets/images/smop-login.svg";
 import Image from "next/image";
 
 export default function LoginForm() {
