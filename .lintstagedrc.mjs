@@ -6,7 +6,11 @@ const buildEslintCommand = (filenames) =>
     .join(" --file ")}`;
 
 const config = {
-  "*.{js,jsx,ts,tsx}": [buildEslintCommand, "prettier --write"],
+  "*.{js,jsx,ts,tsx}": [
+    () => "npm run type:check",
+    buildEslintCommand,
+    "npm run format",
+  ],
 };
 
 export default config;
