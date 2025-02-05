@@ -7,9 +7,9 @@ const buildEslintCommand = (filenames) =>
 
 const config = {
   "*.{js,jsx,ts,tsx}": [
-    () => "tsc -p tsconfig.json --noEmit",
+    () => "npm run type:check",
     buildEslintCommand,
-    "prettier --write",
+    "npm run format",
   ],
 };
 

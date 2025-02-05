@@ -14,10 +14,10 @@ jobs:
           npm ci
       - name: Run tsc
         run: |
-          npm run check-types
+          npm run type:check
       - name: Run linter
         run: |
           npm run lint
       - name: Run formatter
         run: |
-          npm run format:check
+          npm run format
