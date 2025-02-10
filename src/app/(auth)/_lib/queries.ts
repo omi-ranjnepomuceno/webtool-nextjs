@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { userFragment } from "@/fragments/user";
 import { pageInfoFragment } from "@/fragments/pageInfo";
-import { query } from "@/lib/apolloClient";
+import { query } from "@/lib/apollo-client-rsc";
 import { getAuthToken } from "./utils";
 
 import { User } from "@/types/User";
