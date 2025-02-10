@@ -1,10 +1,11 @@
-import { gql } from "@apollo/client";
 import { userFragment } from "@/fragments/user";
 import { pageInfoFragment } from "@/fragments/pageInfo";
-import { query } from "@/lib/apolloClient";
 import { getAuthToken } from "./utils";
 
 import { User } from "@/types/User";
+
+import { gql } from "graphql-request";
+import graphqlClient from "@/lib/graphqlRequestClient";
 
 const userDetailsDocument = gql`
   ${userFragment}
@@ -29,15 +30,8 @@ const userDetailsDocument = gql`
 `;
 
 export async function userDetailsQuery() {
-  const data = await query<User>({
-    query: userDetailsDocument,
-    errorPolicy: "all",
-    context: {
-      headers: {
-        authorization: `JWT ${await getAuthToken()}`,
-      },
-    },
-  });
-
+  const data = await graphqlClient
+    .setHeader("Authorization", `JWT ${await getAuthToken()}`)
+    .request<User>({ document: userDetailsDocument });
   return data;
 }

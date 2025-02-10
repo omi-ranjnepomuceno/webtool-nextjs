@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from "graphql-request";
 
 export const pageInfoFragment = gql`
   fragment PageInfoFragment on PageInfo {
