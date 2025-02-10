@@ -1,4 +1,4 @@
-import { getClient } from "@/lib/apolloClient";
+import { getClient } from "@/lib/apollo-client-rsc";
 import { userFragment } from "@/fragments/user";
 import { pageInfoFragment } from "@/fragments/pageInfo";
 import { gql } from "@apollo/client";
